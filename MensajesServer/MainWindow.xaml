@@ -5,8 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MensajesServer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="400" Width="525">
+        Title="Enviar Mensajes Central" Height="400" Width="900" ResizeMode="NoResize">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="343*"/>
+            <ColumnDefinition Width="346*"/>
+        </Grid.ColumnDefinitions>
+        <DataGrid Margin="10,35,10,25" Grid.ColumnSpan="2"/>
+        <Button x:Name="btnCrearMensaje" Content="_Crear Mensaje" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="92"/>
+
     </Grid>
 </Window>
