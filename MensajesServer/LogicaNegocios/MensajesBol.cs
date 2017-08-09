@@ -16,5 +16,9 @@ namespace MensajesSweet.LogicaNegocios
         {
             return _mensajesDal.GetAll();
         }
+        public EMensaje PorId(int codigo)
+        {
+            return _mensajesDal.GetId(codigo);
+        }
     }
 }

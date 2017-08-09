@@ -43,7 +43,10 @@ namespace MensajesServer
 
         private void btnModificar_Click(object sender, RoutedEventArgs e)
         {
-
+            EMensaje mensaje = ((Button)sender).Tag as EMensaje;
+            AddMensaje cambio = new AddMensaje(mensaje.ID);
+            cambio.Owner = this;
+            cambio.ShowDialog();
         }
 
         private void btnEliminar_Click(object sender, RoutedEventArgs e)
@@ -73,42 +76,7 @@ namespace MensajesServer
             AddMensaje nuevo = new AddMensaje();
             nuevo.Owner = this;
             nuevo.ShowDialog();
-            /*
-            OpenFileDialog openFileDlg = new OpenFileDialog();
-            openFileDlg.InitialDirectory = Directory.GetCurrentDirectory();
-            Nullable<bool> result = openFileDlg.ShowDialog();
-            DateTime Hoy = DateTime.Today;
-            if (result == true)
-            {
-                FileInfo fi = new FileInfo(openFileDlg.FileName);
-                FileStream fs = new FileStream(fi.FullName, FileMode.Open, FileAccess.Read);
-                BinaryReader rdr = new BinaryReader(fs);
-                byte[] fileData = rdr.ReadBytes((int)fs.Length);
-                rdr.Close();
-                fs.Close();
 
-                using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["connMensajes"].ToString()))
-                {
-                    conn.Open();
-                    //string sql = "INSERT INTO Documents VALUES (@DATA, @NOMBRE, default)";
-                    SqlCommand cmd = new SqlCommand("dbo.CreaRegistro", conn);
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add("@Descripcion", SqlDbType.NVarChar).Value = "PRUEBAS CARLITOS";
-                    cmd.Parameters.Add("@Persona", SqlDbType.NVarChar).Value = "CARLOS FABRE";
-                    cmd.Parameters.Add("@Departamento", SqlDbType.Int).Value = 1;
-                    cmd.Parameters.Add("@Fecha", SqlDbType.DateTime).Value = Hoy;
-                    cmd.Parameters.Add("@Vigencia", SqlDbType.Int).Value = 5;
-                    cmd.Parameters.Add("@Observaciones", SqlDbType.NVarChar).Value = "";
-                    cmd.Parameters.Add("@Data", SqlDbType.Image, fileData.Length).Value = fileData;
-                    cmd.Parameters.Add("@Nombre", SqlDbType.NVarChar).Value = fi.Name;
-                    cmd.ExecuteNonQuery();
-                    conn.Close();
-
-                }
-
-                MessageBox.Show(fi.FullName, "Archivo Insertado.!");
-            }
-            */
         }
 
         private void frmMain_Activated(object sender, EventArgs e)
