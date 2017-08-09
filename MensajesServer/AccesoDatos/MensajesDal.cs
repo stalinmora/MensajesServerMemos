@@ -25,10 +25,11 @@ namespace MensajesSweet.AccesoDatos
                                 "A.Fecha AS FECHA, "+
                                 "A.Vigencia AS VIGENCIA, "+
                                 "A.Observaciones AS OBSERVACIONES ,"+
-                                "A.DocumentID AS DOCUMENTO "+
+                                "A.DocumentID AS DOCUMENTO, dateadd(day,A.Vigencia-1,A.Fecha) AS FECHA_VIGENCIA, d.NOMBRE AS NOMBRE " +
                                 " FROM dbo.Messages A "+
                                 "INNER JOIN dbo.Departments B " +
                                 "on(A.DepartmentID = B.ID) " +
+                                "INNER JOIN dbo.Documents d ON(A.DocumentID = d.ID) " +
                                 "WHERE A.ESTADO = 1 AND dateadd(day,A.Vigencia,A.Fecha) >= getdate()";
 
                 using (SqlCommand cmd = new SqlCommand(sql, conn))
@@ -45,7 +46,9 @@ namespace MensajesSweet.AccesoDatos
                             Fecha = Convert.ToDateTime(data["FECHA"]),
                             Vigencia = Convert.ToInt32(data["VIGENCIA"]),
                             Observaciones = Convert.ToString(data["OBSERVACIONES"]),
-                            Documento = Convert.ToInt32(data["DOCUMENTO"])
+                            Documento = Convert.ToInt32(data["DOCUMENTO"]),
+                            FechaVigencia = Convert.ToDateTime(data["FECHA_VIGENCIA"]),
+                            NombreDocumento = Convert.ToString(data["NOMBRE"]),
                         };
                         mensajes.Add(mensaje);
                     }

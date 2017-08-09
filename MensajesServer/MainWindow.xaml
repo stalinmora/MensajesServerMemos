@@ -1,18 +1,37 @@
-﻿<Window x:Class="MensajesServer.MainWindow"
+﻿<Window x:Name="frmMain" x:Class="MensajesServer.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MensajesServer"
         mc:Ignorable="d"
-        Title="Enviar Mensajes Central" Height="400" Width="900" ResizeMode="NoResize">
+        Title="Enviar Mensajes Central" Height="401.5" Width="1027.5" ResizeMode="NoResize" FontSize="11" Activated="frmMain_Activated">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="343*"/>
-            <ColumnDefinition Width="346*"/>
-        </Grid.ColumnDefinitions>
-        <DataGrid Margin="10,35,10,25" Grid.ColumnSpan="2"/>
-        <Button x:Name="btnCrearMensaje" Content="_Crear Mensaje" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="92"/>
+        <DataGrid x:Name="dtgMensajes" Margin="10,35,10,23" AutoGenerateColumns="False" IsReadOnly="True" CanUserResizeColumns="False" CanUserReorderColumns="False" CanUserSortColumns="False" CanUserResizeRows="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Descripcion}" Width="280" Header="Descripcion"/>
+                <DataGridTextColumn Binding="{Binding Persona}" Width="100" Header="Persona"/>
+                <DataGridTextColumn Binding="{Binding Departamento}" Width="100" Header="Departamento"/>
+                <DataGridTextColumn Binding="{Binding Fecha,StringFormat={}{0:dd/MM/yyyy}}" Width="70" Header="Fecha"/>
+                <DataGridTextColumn Binding="{Binding FechaVigencia,StringFormat={}{0:dd/MM/yyyy}}" Width="70" Header="Vigencia"/>
+                <DataGridTextColumn Binding="{Binding NombreDocumento}" Width="240" Header="Archivo"/>
+                <DataGridTemplateColumn Width="60">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button x:Name="btnModificar" Tag="{Binding}" Width="55" Click="btnModificar_Click">Editar</Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Width="60">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button x:Name="btnEliminar" Tag="{Binding}" Width="55" Click="btnEliminar_Click">Eliminar</Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="btnCrearMensaje" Content="_Crear Mensaje" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="92" Click="btnCrearMensaje_Click"/>
 
     </Grid>
 </Window>
